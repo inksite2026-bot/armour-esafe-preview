@@ -1,0 +1,10 @@
+export const denominations = [1, 5, 10, 20, 50, 100] as const;
+export type Notes = Record<number, number>;
+export const initialNotes = (): Notes => ({1:11,5:10,10:3,20:0,50:0,100:1});
+export const emptyNotes = (): Notes => Object.fromEntries(denominations.map(n=>[n,0]));
+export const totals = (notes: Notes) => denominations.reduce((a,n)=>({amount:a.amount+n*notes[n],count:a.count+notes[n]}),{amount:0,count:0});
+export const money = (value:number) => `RM ${value.toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+export const accounts = [{name:'Meridian Retail Sdn. Bhd.',number:'9900 2700 4101',masked:'•••• •••• 4101',branch:'Daily collections',ms:'Kutipan harian'},{name:'Meridian Trading Sdn. Bhd.',number:'9900 2700 4102',masked:'•••• •••• 4102',branch:'Business collections',ms:'Kutipan perniagaan'}];
+export const screenNames = ['Welcome','Language','User ID','Account','Verification','Additional info','Cash deposit','Confirmation','Success'];
+export const formatDate = (date: Date, lang: string) => date.toLocaleDateString(lang==='en'?'en-GB':'ms-MY',{day:'2-digit',month:'long',year:'numeric',timeZone:'Asia/Kuala_Lumpur'});
+export const formatTime = (date: Date) => date.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'});
